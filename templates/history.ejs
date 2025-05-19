@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Workout History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Monomakh&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+    <h1>Your Saved Workouts</h1>
+    
+    <% if (workouts.length===0) { %>
+        <p>No workouts saved yet.</p>
+        <% } else { %>
+            <ul>
+                <% workouts.forEach(w=> { %>
+                    <li>
+                        <strong>
+                            <%= w.name %>
+                        </strong> (<%= w.type %> for <%= w.muscle %>)<br>
+                                Difficulty: <%= w.difficulty %><br>
+                                <p>Rating: <%= w.rating %>/5</p>
+
+                                    <p><%- w.instructions %></p>
+                                    <em>
+                                        <%= w.notes %>
+                                    </em><br>
+                                    <small>
+                                        <%= new Date(w.date).toLocaleString() %>
+                                    </small>
+                                    <hr>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+            <form action="/clear" method="POST" onsubmit="return confirm('Are you sure you want to clear all workout history?');">
+                <button  class= "button-link-clear"type="submit">Clear Workout History</button>
+            </form>
+
+    
+             <a href="/" class="button-link">Back to Home</a>
+
+
+</body>
+
+</html>

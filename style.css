@@ -1,0 +1,66 @@
+body {
+  font-family: 'STIX Two Text', serif;
+  background-color: lightskyblue;
+  color: #333;
+  font-size: 16px;
+  margin: 40px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: blue;
+  font-size: 28px;
+}
+
+.button-link {
+  display: inline-block;
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+.button-link-clear {
+  display: inline-block;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.button-link:hover {
+  background-color: gray;
+}
+.button-link_clear:hover {
+  background-color: gray;
+}
+
+
+button:hover {
+  background-color: gray;
+}
+
+a {
+  color: #1e88e5;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+textarea {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 6px;
+  width: 100%;
+  max-width: 400px;
+}

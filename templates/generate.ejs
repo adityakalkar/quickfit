@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your Workout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Monomakh&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+    <h1>Here’s your quick workout!</h1>
+    
+    <p><strong>
+            <%= workout.name %>
+        </strong></p>
+    <p><em>Type: <%= workout.type %> | Muscle: <%= workout.muscle %> | Difficulty: <%= workout.difficulty %></em></p>
+    <p><%- workout.instructions %></p>
+    
+    <form action="/save" method="POST">
+        <input type="hidden" name="name" value="<%= workout.name %>">
+        <input type="hidden" name="type" value="<%= workout.type %>">
+        <input type="hidden" name="muscle" value="<%= workout.muscle %>">
+        <input type="hidden" name="difficulty" value="<%= workout.difficulty %>">
+        <input type="hidden" name="instructions" value="<%= workout.instructions %>">
+    
+        <label for="notes">Add a note:</label><br>
+        <textarea name="notes" rows="3" cols="40"></textarea><br><br>
+
+        <label for="rating">Rate this workout (1-5):</label><br>
+        <input type="number" name="rating" min="1" max="5" required><br><br>
+    
+        <button class= "button-link" type="submit">Save to History</button>
+    </form>
+    
+    <br>
+    <a href="/generate">Generate another</a> | <a href="/history">View History</a>
+
+
+</body>
+
+</html>
