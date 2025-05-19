@@ -7,13 +7,13 @@ const readline = require("readline");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname)); 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "templates"));
 
-// MongoDB credentials
+
 
 
 const username = process.env.MONGO_DB_USERNAME;
@@ -22,10 +22,10 @@ const db_name = process.env.MONGO_DB_NAME;
 
 const collection_name = process.env.MONGO_COLLECTION;
 
-// Connection URI
+
 const uri = `mongodb+srv://adityakalkar07:W2CBCjs14MlsiEC9@cluster0.pz1djju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// MongoDB client
+
 const client = new MongoClient(uri);
 
 async function main() {
@@ -34,9 +34,9 @@ async function main() {
     console.log("Connected to MongoDB");
 
     const db = client.db(db_name);
-    const workouts = db.collection("workouts"); // hardcoded name is fine
+    const workouts = db.collection("workouts");
 
-    // ROUTES
+
     app.get("/", (req, res) => {
       res.render("index");
     });
@@ -46,32 +46,33 @@ async function main() {
 
 
 
-    app.get("/generate", async (req, res) => {
-      const muscle = "biceps"; // You can change this or make it dynamic later
 
-      try {
-        const response = await fetch(
-          `https://api.api-ninjas.com/v1/exercises?muscle=${muscle}`,
-          {
-            headers: {
-              "X-Api-Key": process.env.EXERCISE_API_KEY,
-            },
-          }
-        );
 
-        const exercises = await response.json();
 
-        if (!Array.isArray(exercises) || exercises.length === 0) {
-          return res.send("No exercises found. Try again later.");
-        }
-
-        const random = exercises[Math.floor(Math.random() * exercises.length)];
-        res.render("generate", { workout: random });
-      } catch (err) {
-        console.error("API fetch error:", err);
-        res.send("Error fetching workout.");
+     app.get("/generate", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://api.api-ninjas.com/v1/exercises",
+      {
+        headers: {
+          "X-Api-Key": process.env.EXERCISE_API_KEY,
+        },
       }
-    });
+    );
+
+    const exercises = await response.json();
+
+    if (!Array.isArray(exercises) || exercises.length === 0) {
+      return res.send("No exercises found. Try again later.");
+    }
+
+    const random = exercises[Math.floor(Math.random() * exercises.length)];
+    res.render("generate", { workout: random });
+  } catch (err) {
+    console.error("API fetch error:", err);
+    res.send("Error fetching workout.");
+  }
+});
 
 
 
